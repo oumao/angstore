@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../models/Product'
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class ProductService {
 
   constructor() { }
 
-  addItemInCart(item: Product) {
+  addProduct(): void {
 
   }
 }
