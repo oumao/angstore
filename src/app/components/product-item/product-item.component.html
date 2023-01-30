@@ -1,1 +1,17 @@
-<p>product-item works!</p>
+
+<a routerLink="product/{{ product.id }}">
+    <img src="{{ product.url }}" class="product-image" alt=""/>
+</a>
+<div class="product-detail">
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.price | currency }}</p>
+    <form (ngSubmit)="addItemToCart(product)">
+        <select [(ngModel)]="pickedItem">
+            <option *ngFor="let prodCount of productCount" value="{{ prodCount }}">
+                {{ prodCount }}
+            </option>
+        </select>
+        <input type="submit" value="Add to Cart" class="submit-btn">
+    </form>
+</div>
+
