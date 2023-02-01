@@ -4,5 +4,5 @@ export interface CartProduct {
     price: number,
     url: string | Blob,
     description: string
-    option: string,
+    quantity: string,
 } 
