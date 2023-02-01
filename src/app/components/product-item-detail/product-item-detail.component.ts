@@ -12,4 +12,6 @@ export class ProductItemDetailComponent {
   constructor() {
     this.product = { id:0, name:'', price:0, url:'', description:''}
   }
+
+  
 }

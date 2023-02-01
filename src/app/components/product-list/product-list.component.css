@@ -5,8 +5,8 @@
   max-width: 1024px;
   margin-bottom: 64px;
 }
-  
+
 .product-container {
-  display: flex;
-  justify-content: center;
+  flex: 0 0 0.333%;
+  margin: 5px;
 }
