@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product } from 'src/app/models/Product';
+import { Product, productcount } from 'src/app/models/Product';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
@@ -9,8 +9,9 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class ProductItemComponent {
   @Input() product: Product
+
   pickedItem = '1'
-  productCount: string[] | undefined = ['1', '2', '3', '4', '5']
+  productCount: string[] = productcount
 
   constructor(private httpService: HttpService) {
     this.product = { id:0, name:'', price:0, url:'', description:''}
@@ -27,7 +28,19 @@ export class ProductItemComponent {
     // Check to see if the item is already added
     if(itemInCart){
       itemInCart.quantity = this.pickedItem;
-      itemInCart ? this.httpService.addToCart(itemsInCart) : null
+    }else{
+      itemInCart = {
+        id: item.id,
+        name: item.name,
+        quantity: this.pickedItem,
+        price: item.price,
+        url: item.url,
+        description: item.description
+      }
+      itemsInCart.push(itemInCart);
     }
+
+    // Store the updated items in the cart
+    this.httpService.addToCart(itemsInCart);
   }
 }

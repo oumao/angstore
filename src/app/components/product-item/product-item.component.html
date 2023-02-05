@@ -6,7 +6,7 @@
     <h3>{{ product.name }}</h3>
     <p>{{ product.price | currency }}</p>
     <form (ngSubmit)="addItemToCart(product)">
-        <select [(ngModel)]="pickedItem">
+        <select [(ngModel)]="pickedItem" name="pickedItem">
             <option *ngFor="let prodCount of productCount" value="{{ prodCount }}">
                 {{ prodCount }}
             </option>
