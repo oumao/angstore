@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router'
 import { CartProduct } from 'src/app/models/CartProduct'
 import { productcount } from 'src/app/models/Product'
 import { HttpService } from 'src/app/services/http.service'
@@ -16,7 +17,7 @@ export class CartComponent {
   address: string;
   creditCard: number | string
 
-  constructor(private cartService: HttpService){
+  constructor(private cartService: HttpService, private router: Router){
     this.fullName = '';
     this.address = '';
     this.creditCard = '';
@@ -35,7 +36,8 @@ export class CartComponent {
     this.cartTotal = Number(this.cartTotal.toFixed(2));
   }
 
-  onCheckOut(): void{
-
+  onCheckOut(fullName: string): void{
+    this.cartService.clearCart();
+    this.router.navigate(["/checkout"])
   }
 }
