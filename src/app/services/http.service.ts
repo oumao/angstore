@@ -15,7 +15,7 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]>{
-    return this.http.get<Product[]>('../../assets/data.json')
+    return this.http.get<Product[]>('assets/data.json')
   }
 
   // Adding an Item to a cart
