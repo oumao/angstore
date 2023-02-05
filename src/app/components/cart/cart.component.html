@@ -1,3 +1,61 @@
-<form action="">
-    <input type="text" name="name" value="">
-</form>
+<div *ngIf="cartItems.length; else noCart" class="cart-container">
+    <div class="cart-item-details">
+        <div *ngFor="let cartItem of cartItems" class="cart-item">
+            <img src="{{cartItem.url}}" alt="">
+            <div class="cart-panel">
+                <div class="product-item-detail">{{ cartItem.name }}</div>
+                <div class="product-item-detail">{{ cartItem.price }}</div>
+                <div class="product-item-detail">
+                    <select name="" id="" class="form-select">
+                        <option 
+                        *ngFor="let productOption of productCount"
+                        [ngValue]="productOption"
+                        >
+                            {{ productOption }}
+                        </option>
+                    </select>
+                </div>
+                <div class="product-item-detail">
+                    <button class="product-item-detail btn btn-primary">Remove</button>
+                </div>
+            </div>
+        </div>
+        <div class="cart-item"><b>Total: ${{ cartTotal}}</b></div>
+    </div>
+    <div class="form-margin">
+        <form class="form-margin" #form="ngForm" (ngSubmit)="onSubmit()">
+            <h1>Checkout</h1>
+            <label>Full Name: </label><br />
+            <input type="text" 
+            name="fullName" 
+            required minlength="9"
+            placeholder="Enter your Full Name"
+            [(ngModel)] = "fullName"
+            ><br />
+
+            <label>Address: </label><br />
+            <input type="text" 
+            name="address" 
+            required minlength="10"
+            placeholder="Enter your Address"
+            [(ngModel)] = "address"
+            ><br />
+
+            <label>Credit Card No: </label><br />
+            <input type="text" 
+            name="creditCard" 
+            required minlength="16" maxlength="16"
+            placeholder="(16-digit number)"
+            [(ngModel)] = "creditCard"
+            ><br />
+
+            <input [disabled]="form.invalid" type="submit" value="Checkout" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+
+<ng-template #noCart>
+    <div class="empty-cart-message">
+        The Cart is Empty! Please, <a routerLink="/"> Add product to cart</a>
+    </div>
+</ng-template>
