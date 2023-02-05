@@ -6,3 +6,4 @@ export interface CartProduct {
     description: string
     quantity: string,
 } 
+
