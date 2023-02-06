@@ -6,17 +6,18 @@
                 <div class="product-item-detail">{{ cartItem.name }}</div>
                 <div class="product-item-detail">{{ cartItem.price }}</div>
                 <div class="product-item-detail">
-                    <select name="" id="" class="form-select">
+                    <select (change)="selectedQuantity(cartItem.id, $event)" class="form-select">
                         <option 
                         *ngFor="let productOption of productCount"
                         [ngValue]="productOption"
+                        [selected]="productOption === cartItem.quantity"
                         >
                             {{ productOption }}
                         </option>
                     </select>
                 </div>
                 <div class="product-item-detail">
-                    <button class="product-item-detail btn btn-primary">Remove</button>
+                    <button (click)="removeItem(cartItem.id)" class="product-item-detail btn btn-primary">Remove</button>
                 </div>
             </div>
         </div>
@@ -28,7 +29,7 @@
             <label>Full Name: </label><br />
             <input type="text" 
             name="fullName" 
-            required minlength="9"
+            required minlength="6"
             placeholder="Enter your Full Name"
             [(ngModel)] = "fullName"
             ><br />
@@ -36,7 +37,7 @@
             <label>Address: </label><br />
             <input type="text" 
             name="address" 
-            required minlength="10"
+            required minlength="5"
             placeholder="Enter your Address"
             [(ngModel)] = "address"
             ><br />
@@ -49,7 +50,7 @@
             [(ngModel)] = "creditCard"
             ><br />
 
-            <input type="submit" value="Checkout" class="btn btn-primary">
+            <input [disabled]="form.invalid" type="submit" value="Checkout" class="btn btn-primary">
         </form>
     </div>
 </div>
