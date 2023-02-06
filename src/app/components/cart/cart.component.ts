@@ -36,6 +36,25 @@ export class CartComponent {
     this.cartTotal = Number(this.cartTotal.toFixed(2));
   }
 
+  selectedQuantity(id: number, event: any): void {
+    const selectedOption = event.target.options[event.target.options.selectedIndex].value;
+    const itemIdx = this.cartItems.findIndex(item=> item.id === id);
+    itemIdx != -1 && this.cartItems.length > 0 ? this.cartItems[itemIdx].quantity = selectedOption: null;
+
+    this.cartItems.length > 0 ? this.cartService.addToCart(this.cartItems) : null;
+    this.calculateProductTotal();
+  }
+
+  removeItem(id: number): void {
+    const itemIdx = this.cartItems? this.cartItems.findIndex(item => item.id === id) : -1;
+
+    if(itemIdx != -1 && this.cartItems.length > 0){
+      this.cartItems.splice(itemIdx, 1);
+      this.cartService.addToCart(this.cartItems);
+      this.calculateProductTotal();
+    }
+  }
+
   onCheckOut(fullName: string): void{
     this.cartService.clearCart();
     this.router.navigate(["/checkout"])
