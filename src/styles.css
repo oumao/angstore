@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+.btn {
+  height: 30px;
+  width: 150px;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.btn-success {
+  background: #4bb543;
+  width: 100px;
+  padding: 5px;
+  color: white;
+}
+
+.btn-primary {
+  background: #33b5e5;
+  width: 100px;
+  padding: 5px;
+  color: white;
+}
+
+.btn-danger {
+  background: #dc3545;
+  width: 100px;
+  padding: 5px;
+  color: white;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
