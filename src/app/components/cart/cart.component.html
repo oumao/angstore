@@ -15,9 +15,9 @@
                             {{ productOption }}
                         </option>
                     </select>
-                </div>
+                </div><br>
                 <div class="product-item-detail">
-                    <button (click)="removeItem(cartItem.id)" class="product-item-detail btn btn-primary">Remove</button>
+                    <button (click)="removeItem(cartItem.id)" class="product-item-detail btn btn-danger">Remove</button>
                 </div>
             </div>
         </div>
@@ -49,14 +49,14 @@
             placeholder="(16-digit number)"
             [(ngModel)] = "creditCard"
             ><br />
-
-            <input [disabled]="form.invalid" type="submit" value="Checkout" class="btn btn-primary">
+            <br>
+            <input [disabled]="form.invalid" type="submit" value="Checkout" class="btn btn-success">
         </form>
     </div>
 </div>
 
 <ng-template #noCart>
     <div class="empty-cart-message">
-        The Cart is Empty! Please, <a routerLink="/"> Add product to cart</a>
+        The Cart is Empty! Please,&nbsp;&nbsp; <a routerLink="/"> <span class="btn btn-success" >Add product to cart</span> </a>
     </div>
 </ng-template>
