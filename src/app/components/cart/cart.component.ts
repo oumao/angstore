@@ -57,6 +57,6 @@ export class CartComponent {
 
   onCheckOut(fullName: string): void{
     this.cartService.clearCart();
-    this.router.navigate(["/checkout"])
+    this.router.navigate(["/checkout"], { queryParams: { cartTotal: this.cartTotal, fullName: this.fullName } });
   }
 }
