@@ -1,0 +1,14 @@
+.success-container {
+  font-size: 2em;
+}
+
+.success-items {
+  display: grid;
+  row-gap: 10px;
+  text-align: center;
+  margin-top: 7em;
+}
+
+.success-header {
+  text-align: center;
+}
