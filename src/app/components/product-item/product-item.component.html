@@ -1,17 +1,19 @@
-
-<a routerLink="product/{{ product.id }}">
-    <img src="{{ product.url }}" class="product-image" alt=""/>
-</a>
-<div class="product-detail">
-    <h3>{{ product.name }}</h3>
-    <p>{{ product.price | currency }}</p>
-    <form (ngSubmit)="addItemToCart(product)">
-        <select [(ngModel)]="pickedItem" name="pickedItem">
-            <option *ngFor="let prodCount of productCount" value="{{ prodCount }}">
-                {{ prodCount }}
-            </option>
-        </select>&nbsp;&nbsp;
-        <input type="submit" value="Add to Cart" class="btn btn-primary">
-    </form>
+<div class="product-container">
+    <a routerLink="/item-detail/{{ product.id }}">
+        <img src="{{ product.url }}" class="product-image" alt=""/>
+    </a>
+    <div class="product-detail">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.price | currency }}</p>
+        <form (ngSubmit)="addItemToCart(product)">
+            <select [(ngModel)]="pickedItem" name="pickedItem" class="select-input">
+                <option *ngFor="let prodCount of productCount" value="{{ prodCount }}">
+                    {{ prodCount }}
+                </option>
+            </select>&nbsp;&nbsp;
+            <input type="submit" value="Add to Cart" class="btn btn-primary">
+        </form>
+    </div>
+    
 </div>
 
