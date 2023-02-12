@@ -1,1 +1,25 @@
-
+<div *ngIf="product" class="detail-container">
+    <div class="detail-item">
+        <img src="{{ product.url }}" class="product-image" alt=""/>
+    </div>
+    <div class="detail-item">
+        <h3 class="">{{ product.name }}</h3>
+        <p class="">{{ product.price | currency }}</p>
+        <p class="">{{ product.description }}</p>
+        
+        <form (ngSubmit)="addItemToCart(product)">
+            <select [(ngModel)]="pickedItem" name="pickedItem" class="select-input">
+                <option *ngFor="let prodCount of productCount" value="{{ prodCount }}">
+                    {{ prodCount }}
+                </option>
+            </select>&nbsp;&nbsp;
+            <input type="submit" value="Add to Cart" class="btn btn-primary">
+        </form>
+        <div class="back-link">
+            <a routerLink="/">
+                &larr; Return to Product List
+            </a>
+        </div>
+    </div>
+</div>
+   
