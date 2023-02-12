@@ -40,6 +40,23 @@ export class CartComponent {
     this.cartTotal = Number(total.toFixed(2));
   }
 
+  
+
+  removeItem(id: number): void {
+    // Check if the id of the item exists in the cartItems
+    const itemIdx = this.cartItems.findIndex(item => item.id === id);
+
+    if(this.cartItems.length > 0){
+      
+      // filter out the cart items without the removed Item 
+      const updatedCartItems = this.cartItems.filter(item => item.id !== id);
+
+      this.cartItems = updatedCartItems;
+      this.cartService.addToCart(this.cartItems);
+      this.calculateProductTotal();
+    }
+  }
+
   // Update the quantities based on the selected input
   selectedQuantity(id: number, eventTarget: EventTarget | null): void {
 
@@ -56,22 +73,6 @@ export class CartComponent {
     this.cartService.addToCart(this.cartItems),
     this.calculateProductTotal()): null;
     
-    
-  }
-
-  removeItem(id: number): void {
-    // Check if the id of the item exists in the cartItems
-    const itemIdx = this.cartItems.findIndex(item => item.id === id);
-
-    if(this.cartItems.length > 0){
-      
-      // filter out the cart items without the removed Item 
-      const updatedCartItems = this.cartItems.filter(item => item.id !== id);
-
-      this.cartItems = updatedCartItems;
-      this.cartService.addToCart(this.cartItems);
-      this.calculateProductTotal();
-    }
   }
 
   // Retrieve user details on Checkout
