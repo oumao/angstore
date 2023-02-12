@@ -69,6 +69,8 @@ export class ProductItemDetailComponent {
 
     // Store the updated items in the cart
     this.httpService.addToCart(itemsInCart);
+
+    alert(`${itemInCart.quantity} ${itemInCart.name}${Number(itemInCart.quantity) > 1 ? 's' : ''} added to cart`);
   }
   
 }
