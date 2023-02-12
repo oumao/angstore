@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { Product, productcount } from 'src/app/models/Product';
+import { CartService } from 'src/app/services/cart.service'
 import { HttpService } from 'src/app/services/http.service'
 
 @Component({
@@ -16,7 +17,7 @@ export class ProductItemDetailComponent {
 
   pickedItem = '1'
 
-  constructor(private httpService: HttpService, private route: ActivatedRoute) {
+  constructor(private cartService: CartService, private httpService: HttpService, private route: ActivatedRoute) {
     this.product = { id:0, name:'', price:0, url:'', description:''}
   }
 
@@ -49,7 +50,7 @@ export class ProductItemDetailComponent {
   }
 
   addItemToCart(item: Product): void{
-    const itemsInCart = this.httpService.getCart();
+    const itemsInCart = this.cartService.getItemsInCart();
     let itemInCart = itemsInCart.find((elem: any) => elem.id === item.id)
 
     // Check to see if the item is already added
@@ -68,7 +69,7 @@ export class ProductItemDetailComponent {
     }
 
     // Store the updated items in the cart
-    this.httpService.addToCart(itemsInCart);
+    this.cartService.addToCart(itemsInCart);
 
     alert(`${itemInCart.quantity} ${itemInCart.name}${Number(itemInCart.quantity) > 1 ? 's' : ''} added to cart`);
   }
