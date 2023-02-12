@@ -36,6 +36,7 @@ export class CartComponent {
     this.cartTotal = Number(this.cartTotal.toFixed(2));
   }
 
+  // Update the quantities based on the selected input
   selectedQuantity(id: number, event: any): void {
     const selectedOption = event.target.options[event.target.options.selectedIndex].value;
     const itemIdx = this.cartItems.findIndex(item=> item.id === id);
@@ -46,6 +47,7 @@ export class CartComponent {
   }
 
   removeItem(id: number): void {
+    // Check if the id of the item exists in the cartItems
     const itemIdx = this.cartItems? this.cartItems.findIndex(item => item.id === id) : -1;
 
     if(itemIdx != -1 && this.cartItems.length > 0){
@@ -55,6 +57,7 @@ export class CartComponent {
     }
   }
 
+  // Retrieve user details on Checkout
   onCheckOut(fullName: string): void{
     this.cartService.clearCart();
     this.router.navigate(["/checkout"], { queryParams: { cartTotal: this.cartTotal, fullName: this.fullName } });
