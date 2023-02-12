@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router'
-import { CartProduct } from 'src/app/models/CartProduct'
+import { Item } from 'src/app/models/Product'
 import { productcount } from 'src/app/models/Product'
+import { CartService } from 'src/app/services/cart.service'
 import { HttpService } from 'src/app/services/http.service'
 
 @Component({
@@ -10,48 +11,64 @@ import { HttpService } from 'src/app/services/http.service'
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
-  cartItems: CartProduct[] = [];
+  cartItems: Item[] = [];
   productCount: string[] = productcount
+
   cartTotal: number = 0;
   fullName: string;
   address: string;
   creditCard: number | string
 
-  constructor(private cartService: HttpService, private router: Router){
+  constructor(private cartService: CartService, private router: Router){
     this.fullName = '';
     this.address = '';
     this.creditCard = '';
   }
 
   ngOnInit(): void {
-    this.cartItems = this.cartService.getCart();
+    this.cartItems = this.cartService.getItemsInCart();
     this.calculateProductTotal();
   }
 
   calculateProductTotal(): void {
-    this.cartTotal = this.cartItems.reduce((curr: number, value: any) => {
-      return curr + value.price * value.quantity as unknown as number;
-    }, 0);
+   let total = 0;
 
-    this.cartTotal = Number(this.cartTotal.toFixed(2));
+   this.cartItems.map(item => {
+    total += item.price * Number(item.quantity);
+   })
+
+    this.cartTotal = Number(total.toFixed(2));
   }
 
   // Update the quantities based on the selected input
-  selectedQuantity(id: number, event: any): void {
-    const selectedOption = event.target.options[event.target.options.selectedIndex].value;
-    const itemIdx = this.cartItems.findIndex(item=> item.id === id);
-    itemIdx != -1 && this.cartItems.length > 0 ? this.cartItems[itemIdx].quantity = selectedOption: null;
+  selectedQuantity(id: number, eventTarget: EventTarget | null): void {
 
-    this.cartItems.length > 0 ? this.cartService.addToCart(this.cartItems) : null;
-    this.calculateProductTotal();
+    if(!eventTarget){
+      return;
+    }
+
+    const selectOption = (eventTarget as HTMLSelectElement).value || '';
+
+    const itemIdx = this.cartItems.findIndex(item => item.id === id);
+
+    this.cartItems.length > 0 
+    ? (this.cartItems[itemIdx].quantity = selectOption,
+    this.cartService.addToCart(this.cartItems),
+    this.calculateProductTotal()): null;
+    
+    
   }
 
   removeItem(id: number): void {
     // Check if the id of the item exists in the cartItems
-    const itemIdx = this.cartItems? this.cartItems.findIndex(item => item.id === id) : -1;
+    const itemIdx = this.cartItems.findIndex(item => item.id === id);
 
-    if(itemIdx != -1 && this.cartItems.length > 0){
-      this.cartItems.splice(itemIdx, 1);
+    if(this.cartItems.length > 0){
+      
+      // filter out the cart items without the removed Item 
+      const updatedCartItems = this.cartItems.filter(item => item.id !== id);
+
+      this.cartItems = updatedCartItems;
       this.cartService.addToCart(this.cartItems);
       this.calculateProductTotal();
     }
@@ -59,7 +76,7 @@ export class CartComponent {
 
   // Retrieve user details on Checkout
   onCheckOut(fullName: string): void{
-    this.cartService.clearCart();
+    this.cartService.clearCartItems();
     this.router.navigate(["/checkout"], { queryParams: { cartTotal: this.cartTotal, fullName: this.fullName } });
   }
 }
