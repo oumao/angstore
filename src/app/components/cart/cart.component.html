@@ -6,7 +6,7 @@
                 <div class="product-item-detail">{{ cartItem.name }}</div>
                 <div class="product-item-detail">{{ cartItem.price }}</div>
                 <div class="product-item-detail">
-                    <select (change)="selectedQuantity(cartItem.id, $event)" class="form-select">
+                    <select (change)="selectedQuantity(cartItem.id, $event.target)" class="form-select">
                         <option 
                         *ngFor="let productOption of productCount"
                         [ngValue]="productOption"
