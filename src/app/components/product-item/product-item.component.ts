@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Product, productcount } from 'src/app/models/Product';
+import { CartService } from 'src/app/services/cart.service'
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class ProductItemComponent {
   pickedItem = '1'
   productCount: string[] = productcount
 
-  constructor(private httpService: HttpService) {
+  constructor(private cartService: CartService) {
     this.product = { id:0, name:'', price:0, url:'', description:''}
   }
 
@@ -22,7 +23,7 @@ export class ProductItemComponent {
   }
 
   addItemToCart(item: Product): void{
-    const itemsInCart = this.httpService.getCart();
+    const itemsInCart = this.cartService.getItemsInCart();
     let itemInCart = itemsInCart.find((elem: any) => elem.id === item.id)
 
     // Check to see if the item is already added
@@ -41,7 +42,7 @@ export class ProductItemComponent {
     }
 
     // Store the updated items in the cart
-    this.httpService.addToCart(itemsInCart);
+    this.cartService.addToCart(itemsInCart);
     // alert(`${itemInCart.quantity} of ${itemInCart.name} added to cart`);
     alert(`${itemInCart.quantity} ${itemInCart.name}${Number(itemInCart.quantity) > 1 ? 's' : ''} added to cart`);
 
