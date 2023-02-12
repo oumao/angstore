@@ -1,27 +1,22 @@
 # Angstore
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.5.
+![Image](src/assets/images/homepage.png)
 
-## Development server
+Angstore is a SPA written in angular 15. It renders a list of products that can be added to cart and checkedout.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Functionalities
 
-## Code scaffolding
+- Display list of products
+- Add products to cart
+- View products in cart
+- Remove an item in cart
+- Checkout products in the cart
+- Display cart Total 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Setup and Installation
 
-## Build
+Clone this repo [AngStore](https://github.com/oumao/angstore.git), **cd** into the root of the project and run `npm install` to install **dependencies**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Starting the Server
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+On the same terminal/cmd run `ng serve`. Navigate to `http://localhost:4200` and view the project. 
