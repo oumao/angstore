@@ -42,5 +42,10 @@ export class ProductItemComponent {
 
     // Store the updated items in the cart
     this.httpService.addToCart(itemsInCart);
+    // alert(`${itemInCart.quantity} of ${itemInCart.name} added to cart`);
+    alert(`${itemInCart.quantity} ${itemInCart.name}${Number(itemInCart.quantity) > 1 ? 's' : ''} added to cart`);
+
+
+
   }
 }
