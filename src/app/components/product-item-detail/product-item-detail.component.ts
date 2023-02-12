@@ -26,23 +26,15 @@ export class ProductItemDetailComponent {
       this.id = params.get('id') as unknown as number;
     })
 
-    this.httpService.getProducts().subscribe(res => {
-      this.products = res;
-
+    this.httpService.getProducts().subscribe(data => {
+      this.products = data;
       this.product = this.getItemById(Number(this.id));
-      console.log(typeof(this.id));
-
-      if (!this.product) {
-        console.error(`No product found with id: ${this.id}`);
-      } else {
-        console.log(this.product);
-      }
-      
     })
   }
 
   getItemById(id: number): Product{
-    return this.products.filter( item => item.id === id)[0];
+    const filtered = this.products.filter( item => item.id === id);
+    return filtered[0];
   }
 
   changeSelected(value: unknown): void {
