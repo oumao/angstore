@@ -46,11 +46,17 @@
             <input type="text" 
             name="creditCard" 
             required minlength="16" maxlength="16"
+            pattern="[0-9]+"
             placeholder="(16-digit number)"
+            #creditCardInput="ngModel"
             [(ngModel)] = "creditCard"
+            (ngModelChange)="validateCreditCard(creditCardInput.value)"
             ><br />
             <br>
             <input [disabled]="form.invalid" type="submit" value="Checkout" class="btn btn-success">
+            <div *ngIf="creditCardInput.errors && creditCardInput.errors['pattern']">
+                Credit card number must be 16-digits and contain only numbers.
+            </div>
         </form>
     </div>
 </div>
