@@ -50,10 +50,14 @@ export class CartComponent {
       
       // filter out the cart items without the removed Item 
       const updatedCartItems = this.cartItems.filter(item => item.id !== id);
+      let itemInCart = this.cartItems.find((elem: any) => elem.id === id)
 
       this.cartItems = updatedCartItems;
       this.cartService.addToCart(this.cartItems);
       this.calculateProductTotal();
+
+      alert(`Item ${itemInCart?.name} is removed from the cart`);
+
     }
   }
 
@@ -79,5 +83,14 @@ export class CartComponent {
   onCheckOut(fullName: string): void{
     this.cartService.clearCartItems();
     this.router.navigate(["/checkout"], { queryParams: { cartTotal: this.cartTotal, fullName: this.fullName } });
+  }
+
+  // Validate Credit Card 
+  validateCreditCard(control: any) {
+    if (control.value.length !== 16 || !/^[0-9]+$/.test(control.value)) {
+      control.setErrors({ pattern: true });
+    } else {
+      control.setErrors(null);
+    }
   }
 }
