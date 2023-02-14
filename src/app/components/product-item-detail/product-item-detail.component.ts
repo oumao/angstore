@@ -26,6 +26,7 @@ export class ProductItemDetailComponent {
       this.id = params.get('id') as unknown as number;
     })
 
+
     this.httpService.getProducts().subscribe(data => {
       this.products = data;
       this.product = this.getItemById(Number(this.id));
