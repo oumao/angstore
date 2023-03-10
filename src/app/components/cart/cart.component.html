@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="cart-item"><b>Total: ${{ cartTotal}}</b></div>
+        <div class="cart-item"><b>Total: {{ cartTotal | currency }}</b></div>
     </div>
     <div class="form-margin">
         <form class="form-margin" #form="ngForm" (ngSubmit)="onCheckOut(fullName)">
